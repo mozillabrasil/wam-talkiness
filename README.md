@@ -1,2 +1,2 @@
-# wam-talkiness
-WAM Talkiness
+# mozilla-palestras
+mozilla-palestras

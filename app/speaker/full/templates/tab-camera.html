@@ -1,0 +1,11 @@
+<ion-view view-title="Camera" id="tab-camera">
+    <ion-content>
+        <video width="100%" height="100%" id="localVideo" autoplay="autoplay">
+            Seu dispositivo não suporta o elemento <code>video</code>.
+        </video>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </ion-content>
+    <div id="btn-take-a-picture" class="card" ng-click="takePickture()">
+        <button class="button button-icon icon ion-camera"></button>
+    </div>
+</ion-view>
