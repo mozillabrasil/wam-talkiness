@@ -1,0 +1,27 @@
+<ion-view view-title="Question">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item item-avatar">
+                <img ng-src="http://www.gravatar.com/avatar/{{question.hashGravatar}}" style="width: 64px; height: 64px" />
+                <h2>{{question.name}}</h2>
+            </div>
+            <div class="item item-body">
+                <p>{{question.question}}</p>
+            </div>
+<!--            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                    <i class="icon ion-thumbsup"></i>
+                    Like
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-chatbox"></i>
+                    Comment
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-share"></i>
+                    Share
+                </a>
+            </div>-->
+        </div>
+    </ion-content>
+</ion-view>

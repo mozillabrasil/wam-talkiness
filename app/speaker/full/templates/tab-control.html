@@ -1,0 +1,33 @@
+<ion-view view-title="Controle Remoto" id="tab-control">
+    <ion-content class="padding auto-height">
+        <div class="row">
+            <div class="col col-offset-33 col-33 col-center text-center">
+                <button type="button" ng-click="socketEmit('up')" class="button button-icon icon ion-chevron-up"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-33 col-center text-center">
+                <button type="button" ng-click="socketEmit('left')" class="button button-icon icon ion-chevron-left"></button>
+            </div>
+            <div class="col col-33 col-center text-center">
+                <div class="menu" id="menu">
+                    <ul id="menu-items">
+                        <li><a ng-click="socketEmit('scrollToLeft')" href="#"><span>Left</span></a></li>
+                        <li><a ng-click="socketEmit('scrollToTop')" href="#"><span>Top</span></a></li>
+                        <li><a ng-click="socketEmit('scrollToRight')" href="#"><span>Right</span></a></li>
+                        <li><a ng-click="socketEmit('scrollToBottom')" href="#"><span>Bottom</span></a></li>
+                    </ul>
+                </div>
+                <button type="button" ng-click="openMenu()" class="button button-icon icon ion-grid" style="z-index: 99999999999999;"></button>
+            </div>
+            <div class="col col-33 col-center text-center">
+                <button type="button" ng-click="socketEmit('right')" class="button button-icon icon ion-chevron-right"></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-offset-33 col-33 col-center text-center">
+                <button type="button" ng-click="socketEmit('down')" class="button button-icon icon ion-chevron-down"></button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
