@@ -1,12 +1,22 @@
 var express = require('express');
+var app = express.createServer();
 var fs = require('fs');
 var io = require('socket.io');
 var mongoose = require('mongoose');
+var os = require('os'); 
+var opts = {
+    port: 1947,
+    baseDir: __dirname + '/app/'
+};
+var $con = mongoose.connect('mongodb://localhost/wam_talkiness');
+var brown = '\033[33m',
+        green = '\033[32m',
+        reset = '\033[0m';
 
-var app = express.createServer();
-var staticDir = express.static;
+/***************************************************/
+/******************** DATABASE *********************/
+/***************************************************/
 
-$con = mongoose.connect('mongodb://localhost/wam_talkiness');
 mongoose.connection.once('connected', function (error) {
     if (error) {
         console.log(error);
@@ -21,35 +31,28 @@ var QuestionSchema = new Schema({
     question: String,
     hashGravatar: String
 });
-
-
 var Question = mongoose.model('questions', QuestionSchema);
 
+/***************************************************/
+/********************* ESCUTAR *********************/
+/***************************************************/
+
+app.listen(opts.port);
 io = io.listen(app);
 
-var opts = {
-    port: 1947,
-    baseDir: __dirname + '/app/'
-};
-var os = require('os');
-
-function getAddresses(cb) {
-    var interfaces = os.networkInterfaces();
-    for (k in interfaces) {
-        for (k2 in interfaces[k]) {
-            var address = interfaces[k][k2];
-            if (address.family === 'IPv4' && !address.internal) {
-                cb(address.address);
-            }
-        }
-    }
-}
-
-app.configure(function () {
-    app.use(express.bodyParser());
+console.log(brown + "reveal.js - WebRTC Server and socket.io remote control" + reset);
+getAddresses(function (address) {
+    console.log(green + 'Your server is listening on http://' + address + ':1947/' + reset);
 });
 
+/***************************************************/
+/******************** SOCKET IO ********************/
+/***************************************************/
+
 io.sockets.on('connection', function (socket) {
+    
+    console.log('oi');
+    
     socket.on('slidechanged', function (slideData) {
         socket.broadcast.emit('slidedata', slideData);
     });
@@ -84,15 +87,13 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-function getPatch($Url) {
+/***************************************************/
+/********************** ROUTES *********************/
+/***************************************************/
 
-    if ($Url === undefined) {
-        return 'app/slides';
-    }
-
-    var $split_url = $Url.split(':' + opts.port + '/');
-    return $split_url[1] === '' ? 'slides' : $split_url[1];
-}
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
 
 app.get("/slides", function (req, res) {
     fs.createReadStream(opts.baseDir + 'slides/index.html').pipe(res);
@@ -120,6 +121,10 @@ app.get("/js/*", function (req, res) {
 
 app.get("/fonts/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'assets/fonts/' + req.params[0]).pipe(res);
+});
+
+app.get("/socket.io/*", function (req, res) {
+    fs.createReadStream(opts.baseDir + '../node_modules/socket.io/node_modules/socket.io-client/' + req.params[0]).pipe(res);
 });
 
 app.get('/questions/get', function (req, res) {
@@ -151,16 +156,28 @@ app.post('/questions/add', function (req, res) {
     });
 });
 
-// Actually listen
-app.listen(opts.port || null);
+/***************************************************/
+/******************** FUNCTIONS ********************/
+/***************************************************/
 
-var brown = '\033[33m',
-        green = '\033[32m',
-        reset = '\033[0m';
+function getAddresses(cb) {
+    var interfaces = os.networkInterfaces();
+    for (k in interfaces) {
+        for (k2 in interfaces[k]) {
+            var address = interfaces[k][k2];
+            if (address.family === 'IPv4' && !address.internal) {
+                cb(address.address);
+            }
+        }
+    }
+}
 
-var slidesLocation = "http://localhost" + (opts.port ? (':' + opts.port) : '');
+function getPatch($Url) {
 
-console.log(brown + "reveal.js - WebRTC Server and socket.io remote control" + reset);
-getAddresses(function (address) {
-    console.log(green + 'Your server is listening on http://' + address + ':1947/' + reset);
-});
+    if ($Url === undefined) {
+        return 'app/slides';
+    }
+
+    var $split_url = $Url.split(':' + opts.port + '/');
+    return $split_url[1] === '' ? 'slides' : $split_url[1];
+}
