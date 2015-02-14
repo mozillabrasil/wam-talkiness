@@ -1,0 +1,67 @@
+.reveal {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
+  font-size: 36px;
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  color: black;
+}
+
+::selection {
+  color: white;
+  background: #26351c;
+  text-shadow: none;
+}
+
+.reveal ul li {
+  font-size: 1em;
+  line-height: 1.3em;
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: 0 0 20px 0;
+  color: #1E2020;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
+  line-height: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  text-shadow: none;
+}
+
+.reveal h1 {
+  font-weight: bold;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.reveal section img {
+    border: 0px;
+    box-shadow: none;
+}
+.reveal .hasSQL pre{
+    font-size: 14px;
+    box-shadow: none;
+}
+.reveal .hasSQL table {
+    font-size: 22.2px;
+}
+
+.toLeft{
+    float: left;
+}
+.toRight{
+    float: right;
+}
+.hasSQL .text-center{
+    font-size: 20px;
+}
+.text-center{
+    text-align: center;
+}
