@@ -103,6 +103,14 @@ app.get("/slides/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'slides/' + req.params[0]).pipe(res);
 });
 
+app.get("/emails", function (req, res) {
+    fs.createReadStream(opts.baseDir + 'emails/index.html').pipe(res);
+});
+
+app.get("/emails/*", function (req, res) {
+    fs.createReadStream(opts.baseDir + 'emails/' + req.params[0]).pipe(res);
+});
+
 app.get("/speaker", function (req, res) {
     fs.createReadStream(opts.baseDir + 'speaker/index.html').pipe(res);
 });
