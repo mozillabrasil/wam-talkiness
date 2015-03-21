@@ -84,4 +84,10 @@ angular.module('speaker.controllers', ['ionic'])
             $scope.settings = {
                 enableFriends: true
             };
+
+            $scope.socketEmit = function ($direction) {
+                window['$socket'].emit('remote', {
+                    command: $direction
+                });
+            };
         });
