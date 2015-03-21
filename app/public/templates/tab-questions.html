@@ -1,0 +1,21 @@
+<ion-view view-title="Questions" id="tab-questions">
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"
+                     pulling-text="Pull to refresh..."
+                     refreshing-text="Refreshing!"
+                     refreshing-icon="ion-loading-c">
+                     
+      </ion-refresher>
+        <ion-list>
+            <ion-item
+                animation="fade-out"
+
+                class="item-remove-animate item-avatar item-icon-right" ng-repeat="question in questions" type="item-text-wrap" href="#/tab/questions/{{question._id}}">
+                <img ng-src="http://www.gravatar.com/avatar/{{question.hashGravatar}}"/>
+                <h2>{{question.name}}</h2>
+                <p>{{question.question}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
