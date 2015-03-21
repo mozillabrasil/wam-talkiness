@@ -1,0 +1,21 @@
+<ion-view view-title="Ask" id="tab-ask">
+    <ion-content class="padding auto-height">
+        <form id="form-ask" action="#/questions/add" style="scroll">
+            <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Name</span>
+                    <input type="text" name="name" value="" ng-model="formData.name"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input type="email" name="email" value="" ng-model="formData.email"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Question</span>
+                    <textarea name="question" placeholder="" ng-model="formData.question"></textarea>
+                </label>
+            </ion-list>
+            <button ng-click="submitForm()" class="button button-stable button-block" type="button">Submit</button>
+        </form>
+    </ion-content>
+</ion-view>

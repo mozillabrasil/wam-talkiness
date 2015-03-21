@@ -5,16 +5,7 @@
             <li class="item item-toggle">
                 Pausar
                 <label class="toggle toggle-positive">
-                    <input type="checkbox"/>
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
-            <li class="item item-toggle">
-                Fullscreen
-                <label class="toggle toggle-positive">
-                    <input type="checkbox"/>
+                    <input type="checkbox" ng-click="socketEmit('pause')"/>
                     <div class="track">
                         <div class="handle"></div>
                     </div>

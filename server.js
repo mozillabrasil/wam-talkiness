@@ -40,9 +40,13 @@ var Question = mongoose.model('questions', QuestionSchema);
 app.listen(opts.port);
 io = io.listen(app);
 
-console.log(brown + "reveal.js - WebRTC Server and socket.io remote control" + reset);
+console.log(brown + "WAM - Talkiness" + reset);
 getAddresses(function (address) {
     console.log(green + 'Your server is listening on http://' + address + ':1947/' + reset);
+});
+
+app.configure(function () {
+    app.use(express.bodyParser());
 });
 
 /***************************************************/
@@ -117,6 +121,14 @@ app.get("/speaker", function (req, res) {
 
 app.get("/speaker/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'speaker/' + req.params[0]).pipe(res);
+});
+
+app.get("/public", function (req, res) {
+    fs.createReadStream(opts.baseDir + 'public/index.html').pipe(res);
+});
+
+app.get("/public/*", function (req, res) {
+    fs.createReadStream(opts.baseDir + 'public/' + req.params[0]).pipe(res);
 });
 
 app.get("/css/*", function (req, res) {
