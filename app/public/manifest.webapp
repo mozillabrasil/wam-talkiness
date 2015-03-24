@@ -1,0 +1,24 @@
+{
+    "name": "Public",
+    "version": "1.0",
+    "description": "Slides and communication simplified",
+    "launch_path": "/index.html",
+    "fullscreen": "true",
+    "icons": {
+        "16": "/images/public/icon-16.png",
+        "32": "/images/public/icon-32.png",
+        "48": "/images/public/icon-48.png",
+        "60": "/images/public/icon-60.png",
+        "64": "/images/public/icon-64.png",
+        "90": "/images/public/icon-90.png",
+        "120": "/images/public/icon-120.png",
+        "128": "/images/public/icon-128.png",
+        "256": "/images/public/icon-256.png",
+        "512": "/images/public/icon-512.png"
+    },
+    "developer": {
+        "name": "Rodrigo Waters",
+        "url": "http://www.rodrigowaters.com"
+    },
+    "default_locale": "pt-BR"
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Speaker",
+    "version": "1.0",
+    "description": "Slides and communication simplified",
+    "launch_path": "/index.html",
+    "fullscreen": "true",
+    "icons": {
+        "16": "/images/speaker/icon-16.png",
+        "32": "/images/speaker/icon-32.png",
+        "48": "/images/speaker/icon-48.png",
+        "60": "/images/speaker/icon-60.png",
+        "64": "/images/speaker/icon-64.png",
+        "90": "/images/speaker/icon-90.png",
+        "120": "/images/speaker/icon-120.png",
+        "128": "/images/speaker/icon-128.png",
+        "256": "/images/speaker/icon-256.png",
+        "512": "/images/speaker/icon-512.png"
+    },
+    "developer": {
+        "name": "Rodrigo Waters",
+        "url": "http://www.rodrigowaters.com"
+    },
+    "default_locale": "pt-BR"
+}

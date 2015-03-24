@@ -3,7 +3,7 @@ var app = express.createServer();
 var fs = require('fs');
 var io = require('socket.io');
 var mongoose = require('mongoose');
-var os = require('os'); 
+var os = require('os');
 var opts = {
     port: 1947,
     baseDir: __dirname + '/app/'
@@ -54,9 +54,9 @@ app.configure(function () {
 /***************************************************/
 
 io.sockets.on('connection', function (socket) {
-    
+
     console.log('oi');
-    
+
     socket.on('slidechanged', function (slideData) {
         socket.broadcast.emit('slidedata', slideData);
     });
@@ -96,7 +96,7 @@ io.sockets.on('connection', function (socket) {
 /***************************************************/
 
 app.get('/', function (req, res) {
-  res.send('Hello World');
+    res.send('Hello World');
 });
 
 app.get("/slides", function (req, res) {
@@ -156,7 +156,7 @@ app.get('/questions/get', function (req, res) {
 app.get('/questions/get/:objectID', function (req, res) {
     var $objectID = req.route.params.objectID;
     Question.find({
-        _id : $objectID
+        _id: $objectID
     }, function (err, docs) {
         res.json(docs);
     });
