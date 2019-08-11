@@ -1,61 +1,54 @@
 var express = require('express');
-var app = express.createServer();
+var server = express();
+var app = require('http').Server(server);
+var io = require('socket.io')(app);
+
 var fs = require('fs');
-var io = require('socket.io');
-var mongoose = require('mongoose');
+
 var os = require('os');
 var opts = {
     port: 1947,
     baseDir: __dirname + '/app/'
 };
-var $con = mongoose.connect('mongodb://localhost/wam_talkiness');
-var brown = '\033[33m',
-        green = '\033[32m',
-        reset = '\033[0m';
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://wam_talkiness:wam_talkiness@cluster0-gwc4o.gcp.mongodb.net/test?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+
+  const collection = client.db("app").collection("questions");
+
+  client.close();
+
+});
 
 /***************************************************/
 /******************** DATABASE *********************/
 /***************************************************/
+  
+    var brown = '\033[33m',
+    green = '\033[32m',
+    reset = '\033[0m';
 
-mongoose.connection.once('connected', function (error) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log("Connected to database");
-    }
-});
-var Schema = mongoose.Schema;
-var QuestionSchema = new Schema({
-    name: String,
-    email: String,
-    question: String,
-    hashGravatar: String
-});
-var Question = mongoose.model('questions', QuestionSchema);
-
-/***************************************************/
-/********************* ESCUTAR *********************/
-/***************************************************/
-
+// /***************************************************/
+// /********************* ESCUTAR *********************/
+// /***************************************************/
 app.listen(opts.port);
-io = io.listen(app);
 
 console.log(brown + "WAM - Talkiness" + reset);
 getAddresses(function (address) {
     console.log(green + 'Your server is listening on http://' + address + ':1947/' + reset);
 });
 
-app.configure(function () {
-    app.use(express.bodyParser());
-});
+// app.configure(function () {
+//     app.use(express.bodyParser());
+// });
 
-/***************************************************/
-/******************** SOCKET IO ********************/
-/***************************************************/
+// /***************************************************/
+// /******************** SOCKET IO ********************/
+// /***************************************************/
 
 io.sockets.on('connection', function (socket) {
-
-    console.log('oi');
 
     socket.on('slidechanged', function (slideData) {
         socket.broadcast.emit('slidedata', slideData);
@@ -91,69 +84,69 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-/***************************************************/
-/********************** ROUTES *********************/
-/***************************************************/
+// /***************************************************/
+// /********************** ROUTES *********************/
+// /***************************************************/
 
-app.get('/', function (req, res) {
+server.get('/', function (req, res) {
     res.send('Hello World');
 });
 
-app.get("/slides", function (req, res) {
+server.get("/slides", function (req, res) {
     fs.createReadStream(opts.baseDir + 'slides/index.html').pipe(res);
 });
 
-app.get("/slides/*", function (req, res) {
+server.get("/slides/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'slides/' + req.params[0]).pipe(res);
 });
 
-app.get("/emails", function (req, res) {
+server.get("/emails", function (req, res) {
     fs.createReadStream(opts.baseDir + 'emails/index.html').pipe(res);
 });
 
-app.get("/emails/*", function (req, res) {
+server.get("/emails/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'emails/' + req.params[0]).pipe(res);
 });
 
-app.get("/speaker", function (req, res) {
+server.get("/speaker", function (req, res) {
     fs.createReadStream(opts.baseDir + 'speaker/index.html').pipe(res);
 });
 
-app.get("/speaker/*", function (req, res) {
+server.get("/speaker/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'speaker/' + req.params[0]).pipe(res);
 });
 
-app.get("/public", function (req, res) {
+server.get("/public", function (req, res) {
     fs.createReadStream(opts.baseDir + 'public/index.html').pipe(res);
 });
 
-app.get("/public/*", function (req, res) {
+server.get("/public/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'public/' + req.params[0]).pipe(res);
 });
 
-app.get("/css/*", function (req, res) {
+server.get("/css/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'assets/css/' + req.params[0]).pipe(res);
 });
 
-app.get("/js/*", function (req, res) {
+server.get("/js/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'assets/js/' + req.params[0]).pipe(res);
 });
 
-app.get("/fonts/*", function (req, res) {
+server.get("/fonts/*", function (req, res) {
     fs.createReadStream(opts.baseDir + 'assets/fonts/' + req.params[0]).pipe(res);
 });
 
-app.get("/socket.io/*", function (req, res) {
+server.get("/socket.io/*", function (req, res) {
     fs.createReadStream(opts.baseDir + '../node_modules/socket.io/node_modules/socket.io-client/' + req.params[0]).pipe(res);
 });
 
-app.get('/questions/get', function (req, res) {
+server.get('/questions/get', function (req, res) {
     Question.find({}, function (err, docs) {
         res.json(docs);
     });
 });
 
-app.get('/questions/get/:objectID', function (req, res) {
+server.get('/questions/get/:objectID', function (req, res) {
     var $objectID = req.route.params.objectID;
     Question.find({
         _id: $objectID
@@ -162,7 +155,7 @@ app.get('/questions/get/:objectID', function (req, res) {
     });
 });
 
-app.post('/questions/add', function (req, res) {
+server.post('/questions/add', function (req, res) {
     var $question = new Question(req.body);
     $question.save(function (error, data) {
         if (error) {

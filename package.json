@@ -1,24 +1,22 @@
 {
-    "name": "Talkiness",
+    "name": "talkiness",
     "version": "1.0.0",
     "description": "Slides and communication simplified",
     "homepage": "http://github.com/mozillabrasil/wam-talkiness",
     "author": {
-        "name": "Rodrigo Waters",
+        "name": "Rodrigo Silva",
         "email": "rdrgwtrs@gmail.com",
-        "web": "http://wam.mozillabrasil.org.br"
+        "web": "https://rodrigowaters.github.io/"
     },
     "repository": {
         "type": "git",
         "url": "git://github.com/mozillabrasil/wam-talkiness"
     },
-    "engines": {
-        "node": "~0.8.0"
-    },
-    "dependencies": {
-        "mongodb": "^1.4.30",
-        "mongoose": "^3.8.23",
-        "express": "~2.5.9",
-        "socket.io": "~0.9.6"
+    "engines": {},
+    "dependencies": {},
+    "devDependencies": {
+        "express": "^4.17.1",
+        "mongodb": "^3.3.0-beta2",
+        "socket.io": "^2.2.0"
     }
 }
