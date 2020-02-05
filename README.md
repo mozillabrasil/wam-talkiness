@@ -18,12 +18,12 @@ $ node server.js
 Se tudo ocorrer corretamente você terá essa resposta :
 
 ```ssh
-$ Your server is listening on http://192.168.1.1:1947/
+$ Your server is listening on http://yourserverip:1947/
 $ Connected to database
 ```
 
 ### Slides
-- http://yourserverip:1974
+- http://yourserverip:1974/slides
 
 ### Palestrante
 - http://yourserverip:1974/speaker
@@ -33,6 +33,7 @@ $ Connected to database
 
 **WAM**
 >Fazer o bem está em nosso código!
+
 [MongoDB]:http://mongodb.org/
 [MongooseJS]:http://mongoosejs.com/
 [express]:http://expressjs.com
