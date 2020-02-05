@@ -6,17 +6,17 @@
         <script>
             function openPage(type)
             {
-                window.location = window.location.href.concat(type).concat('/index.html');
+                window.location = window.location.origin.concat('/speaker/').concat(type).concat('/index.html');
             }
         </script>
     </head>
     <body>
         <ul>
             <li>
-                <a href="#" onclick="openPage('/basic');">Basic</a>
+                <a href="#" onclick="openPage('basic');">Basic</a>
             </li>
             <li>
-                <a href="#" onclick="openPage('/full');">Full</a>
+                <a href="#" onclick="openPage('full');">Full</a>
             </li>
         </ul>        
     </body>
